@@ -3,9 +3,8 @@ let isPhoneRequired = false
 const phoneLabelSpan = document.querySelector('.phone-label-span')
 const phoneField = document.getElementById('phone')
 
-document
-  .querySelector('#phone-checkbox')
-  .addEventListener('change', function () {
+document.querySelector('#phone-checkbox')
+  .addEventListener('change', function() {
     if (this.checked) {
       phoneLabelSpan.style.display = 'inline'
       phoneField.required = !isPhoneRequired
@@ -17,9 +16,8 @@ document
     }
   })
 
-document.querySelector('button[type="submit"]').addEventListener(
-  'click',
-  function (event) {
+document.querySelector('button[type="submit"]')
+  .addEventListener('click', function(event) {
     event.preventDefault()
     const firstNameField = document.getElementById('firstName')
     const lastNameField = document.getElementById('lastName')
@@ -31,20 +29,13 @@ document.querySelector('button[type="submit"]').addEventListener(
     const phoneCheckbox = document.getElementById('phone-checkbox')
     const fileField = document.querySelector('input[type="file"]')
     const successMessage = document.querySelector('.success')
-    if (
-      !firstNameField.value ||
-      !lastNameField.value ||
-      !emailField.value ||
-      !textareaField.value
-    ) {
+    if (!firstNameField.value || !lastNameField.value || !emailField.value || !textareaField.value) {
       return showAndHideErrorMessage()
     }
     if (isPhoneRequired && !phoneField.value) {
       return showAndHideErrorMessage()
     }
-    if (
-      !emailField.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
-    ) {
+    if (!emailField.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
       return showAndHideErrorMessage()
     }
     firstNameField.value = ''
@@ -60,22 +51,20 @@ document.querySelector('button[type="submit"]').addEventListener(
     phoneLabelSpan.style.display = 'none'
     successMessage.style.display = 'block'
     isPhoneRequired = false
-    scroll(0, 0)
+    scroll(0,0)
     hideMessageAfterTimeout(successMessage)
-  },
-  false,
-)
+  }, false)
 
 function showAndHideErrorMessage() {
   const errorMessage = document.querySelector('.error')
   errorMessage.style.display = 'block'
-  scroll(0, 0)
+  scroll(0,0)
   hideMessageAfterTimeout(errorMessage)
   return
 }
 
 function hideMessageAfterTimeout(element) {
-  setTimeout(function () {
+  setTimeout(function() {
     element.style.display = 'none'
   }, 3000)
 }

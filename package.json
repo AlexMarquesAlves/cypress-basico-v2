@@ -5,7 +5,9 @@
   "main": "src/index.html",
   "scripts": {
     "cypress:web": "npx cypress open",
+    "cypress:mobile": "npx cypress open --config viewportWidth=410 viewportHeight=860",
     "cypress:headless": "npx cypress run --browser electron",
+    "cypress:headless:mobile": "npx cypress run --browser electron --config viewportWidth=410 viewportHeight=860",
     "format": "prettier \"./**/*.{ts,tsx,js,jsx,css,html}\" --write",
     "check": "prettier \"./**/*.{ts,tsx,js,jsx,css,html}\" --check"
   },
