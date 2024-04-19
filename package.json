@@ -5,7 +5,9 @@
   "main": "src/index.html",
   "scripts": {
     "cypress:web": "npx cypress open",
-    "cypress:headless": "npx cypress run --browser electron"
+    "cypress:headless": "npx cypress run --browser electron",
+    "format": "prettier \"./**/*.{ts,tsx,js,jsx,css,html}\" --write",
+    "check": "prettier \"./**/*.{ts,tsx,js,jsx,css,html}\" --check"
   },
   "repository": {
     "type": "git",

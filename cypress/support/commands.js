@@ -23,3 +23,32 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('fillMandatoryFieldsAndSubmit', () => {
+  const form = {
+    name: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@email.com',
+    number: '123456789',
+    howWeMayHelp: 'Testing message...',
+  }
+
+  cy.get('input[id="firstName"]')
+    .should('be.visible')
+    .type(form.name, { delay: 0 })
+    .should('have.value', form.name)
+  cy.get('input[id="lastName"]')
+    .should('be.visible')
+    .type(form.lastName, { delay: 0 })
+    .should('have.value', form.lastName)
+  cy.get('input[id="email"]')
+    .should('be.visible')
+    .type(form.email, { delay: 0 })
+    .should('have.value', form.email)
+  cy.get('textarea[id="open-text-area"]')
+    .should('be.visible')
+    .type(form.howWeMayHelp, { delay: 0 })
+    .should('have.value', form.howWeMayHelp)
+  cy.contains('button', 'Enviar').should('be.visible').click()
+  cy.get('span[class="success"]').should('be.visible')
+})
