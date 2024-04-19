@@ -8,7 +8,7 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     // baseUrl:'https://cac-tat.s3.eu-central-1.amazonaws.com/index.html',
-    video: true,
+    // video: true,
     viewportHeight: 880,
     viewportWidth: 1280,
   },
