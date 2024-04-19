@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
@@ -7,7 +9,7 @@ module.exports = defineConfig({
     },
     // baseUrl:'https://cac-tat.s3.eu-central-1.amazonaws.com/index.html',
     // pluginsFile: false,
-    // viewportHeight: 880,
-    // viewportWidth: 1280,
+    viewportHeight: 880,
+    viewportWidth: 1280,
   },
 })
