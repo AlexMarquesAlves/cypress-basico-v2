@@ -61,12 +61,13 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.tick(THREE_SECONDS_IN_MS)
     cy.get('span[class="error"]').should('not.be.visible')
   })
-
-  it('somente números são aceitos', () => {
-    cy.get('#phone')
-      .should('be.visible')
-      .type(form.email)
-      .should('have.value', '')
+  Cypress._.times(3, () => {
+    it('campo telefone continua vazio quando preenchido com um valor não-numérico', () => {
+      cy.get('#phone')
+        .should('be.visible')
+        .type(form.email)
+        .should('have.value', '')
+    })
   })
 
   it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
@@ -221,5 +222,56 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('#white-background > :nth-child(5)').contains(
       'Talking About Testing',
     )
+  })
+
+  it('exibe e esconde as mensagens de sucesso e erro usando o .invoke()', () => {
+    cy.get('.success')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Mensagem enviada com sucesso.')
+      .invoke('hide')
+      .should('not.be.visible')
+
+    cy.get('.error')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Valide os campos obrigatórios!')
+      .invoke('hide')
+      .should('not.be.visible')
+  })
+
+  it('preenche a area de texto usando o comando invoke', () => {
+    const longText = Cypress._.repeat(form.howWeMayHelp, 20)
+
+    cy.get('#open-text-area')
+      .should('be.visible')
+      .invoke('val', longText)
+      .should('have.value', longText)
+  })
+
+  it('faz uma requisição HTTP', () => {
+    cy.request(
+      'https://cac-tat.s3.eu-central-1.amazonaws.com/index.html',
+    ).should((response) => {
+      const { status, statusText, body } = response
+      expect(status).to.equal(200)
+      expect(statusText).to.eq('OK')
+      expect(body).to.include('<h1 id="title">CAC TAT</h1>')
+      expect(body).to.include('<span id="cat">🐈</span>')
+    })
+  })
+
+  it.only('encontra o gato escondido', () => {
+    cy.get('span#cat')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', '🐈')
+    cy.get('#title').invoke('text', 'CAT TAT').should('be.visible')
+    cy.get('#subtitle')
+      .invoke('text', 'Eu ❤️ gatos 🐈🐈🐈')
+      .should('be.visible')
   })
 })
