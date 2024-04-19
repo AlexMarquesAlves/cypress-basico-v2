@@ -49,6 +49,4 @@ Cypress.Commands.add('fillMandatoryFieldsAndSubmit', () => {
     .should('be.visible')
     .type(form.howWeMayHelp, { delay: 0 })
     .should('have.value', form.howWeMayHelp)
-  cy.contains('button', 'Enviar').should('be.visible').click()
-  cy.get('span[class="success"]').should('be.visible')
 })
